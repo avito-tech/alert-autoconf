@@ -1,0 +1,56 @@
+# Демонстрация насыщения get-service-deploys
+# Документация: <ссылка удалена>
+---
+version: "1.1"
+triggers:
+  - name: service-giraffe degradation
+    targets:
+      - movingSum(complex.delete_me.services.giraffe.http_responses.5xx, '5min')
+    desc: Меряем пятисотки сервиса-жирафа.
+    warn_value: 2
+    error_value: 5
+    tags:
+      - service-giraffe
+      - some-other-tag-1
+      - some-other-tag-2
+
+    saturation:
+      - type: "get-service-deploys"
+
+alerting:
+
+  # Отправка всех уведомлений по сервису в канал #service-giraffe
+  # вне зависимости от того, был ли деплой
+  - tags:
+      - service-giraffe
+    contacts:
+      - type: slack
+        value: "#service-giraffe"
+
+  # Отправка в канал только тех уведомлений, которые пришли, когда не было деплоя
+  # в последние 20 минут
+  - tags:
+      - service-giraffe
+      - no-deploy
+    contacts:
+      - type: slack
+        value: "#service-giraffe-dev"
+
+  # Если деплой был, то отправляем уведомление и в канал, и непосредственно деплоеру
+  - tags:
+      - service-giraffe
+      # без подписки на тэг deploy функция _deployer не имеет смысла
+      - deploy
+    contacts:
+      - type: slack
+        value: "_deployer"
+        # Обязательно нужно указать fallback_value, это может быть человек или канал
+        # если при получении деплоера произойдёт ошибка, то именно ему уйдёт уведомление
+        fallback_value: "@nsgumilev"
+        # или, например:
+        # fallback_value: "#critical-errors"
+    escalations:
+      - contacts:
+        - type: mail
+          value: "unfixed-errors@example.yourdomain.ru"
+        offset_in_minutes: 15

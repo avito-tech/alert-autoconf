@@ -1,0 +1,128 @@
+---
+version: "1"
+triggers:
+  - name: Trigger_1           # Имя триггера
+    targets:                  # Список метрик
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+    desc: Test description 1  # Описание триггера
+    warn_value: 15            # Выполнить рассылку со статусом 'Warning', если значение графика будет меньше указанного
+    error_value: 10           # Выполнить рассылку со статусом 'Error', если значение графика будет меньше указанного
+    ttl: 100                  # Количество секунд, через которе нужно сделать рассылку со статусом из поля 'ttl_state'
+    tags:                     # Группа для оповещения
+      - service 1
+    ttl_state: ERROR
+    time_start: "12:30"       # Время начала применения данного триггера
+    time_end: "23:59"         # Время окончания применения данного триггера
+    day_disable:              # Дни, в которых данная настройка игнорируется
+      - Tue
+
+  - name: Trigger_2
+    targets:
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+    desc: Test description 2
+    warn_value: 10
+    error_value: 20
+    ttl: 20
+    tags:
+      - service 2
+    ttl_state: NODATA
+    expression: "(t1 > 10) ? ERROR : ((t2 > 4) ? WARN : OK)"    # Условие в стиле govaluate
+    day_disable:
+      - Tue
+      - Wed
+
+  - name: Trigger_3
+    targets:
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+      - stats.timers.service.rec-collab.service.dev.api.default_not_found_POST.request_time.404.mean
+    desc: Test description 3
+    warn_value: 15
+    error_value: 30
+    time_start: "12:30"
+    time_end: "23:59"
+    ttl: 20
+    tags:
+      - service 3
+    ttl_state: NODATA
+    day_disable:
+      - Tue
+      - Wed
+
+  - name: Trigger_4
+    targets:
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+      - stats.timers.service.rec-collab.service.dev.api.default_not_found_POST.request_time.404.mean
+    desc: Test description 3
+    warn_value: 15
+    error_value: 30
+    time_start: "12:30"
+    time_end: "23:59"
+    ttl: 20
+    tags:
+      - service 3
+    ttl_state: NODATA
+    day_disable:
+      - Tue
+      - Wed
+
+  - name: Trigger_5
+    targets:
+      - stats.timers.service.rec-collab.service.dev.api.rec_rec_POST.request_time.404.mean
+      - stats.timers.service.rec-collab.service.dev.api.default_not_found_POST.request_time.404.mean
+    desc: Test description 3
+    warn_value: 15
+    error_value: 30
+    time_start: "12:30"
+    time_end: "23:59"
+    ttl: 20
+    tags:
+      - service 3
+    ttl_state: NODATA
+    day_disable:
+      - Tue
+      - Wed
+
+alerting:
+  - tags:
+      - service 1
+    contacts:
+      - type: mail
+        value: sskapun@gmail.com
+    escalations:
+      - contacts:
+        - type: send-sms
+          value: '+7192424324'
+        offset_in_minutes: 10
+
+  - tags:
+      - service 1
+      - service 2
+    contacts:
+      - type: mail
+        value: sskapun@gmail.com
+      - type: mail
+        value: sskapun@gmail.com
+
+  - tags:
+      - service 1
+      - service 2
+      - service 3
+    contacts:                    # Список допустимых типов контакта
+      - type: mail
+        value: sskapun@gmail.com
+      - type: send-sms
+        value: '+7192424324'
+      - type: mail
+        value: qwe@qwe.com
+      - type: pushover
+        value: test
+      - type: slack
+        value: '@test'
+      - type: telegram
+        value: '@test'
+      - type: twilio sms
+        value: tw_sms
+      - type: twilio voice
+        value: tw_vioce

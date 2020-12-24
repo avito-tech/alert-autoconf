@@ -1,0 +1,5 @@
+version: "2"
+services:
+  alert:
+    build: .
+    image: registry.yourdomain.ru/alerting/alert:0.2.8

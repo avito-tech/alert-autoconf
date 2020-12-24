@@ -1,0 +1,46 @@
+---
+version: "1.1"
+prefix: "my-prefix-"
+
+triggers:
+  - name: Trigger_1           # Имя триггера
+    targets:                  # Список метрик
+      - stats.timer_1
+    desc: Test description 1  # Описание триггера
+    warn_value: 15            # Выполнить рассылку со статусом 'Warning', если значение графика будет меньше указанного
+    error_value: 10           # Выполнить рассылку со статусом 'Error', если значение графика будет меньше указанного
+    ttl: 100                  # Количество секунд, через которе нужно сделать рассылку со статусом из поля 'ttl_state'
+    tags:                     # Группа для оповещения
+      - service_1
+    ttl_state: ERROR
+    time_start: "12:30"       # Время начала применения данного триггера
+    time_end: "23:59"         # Время окончания применения данного триггера
+    day_disable:              # Дни, в которых данная настройка игнорируется
+      - Tue
+
+alerting:
+  - tags:
+      - service_1
+    contacts:
+      - type: mail
+        value: sskapun@gmail.com
+
+  - tags:
+      - service_1
+    contacts:
+      - type: mail
+        value: sskapun@gmail.com
+    time_start: "12:30"       # Время начала применения
+    time_end: "23:50"         # Время окончания применения
+    day_disable:              # Дни, в которых данная настройка игнорируется
+      - Tue
+    escalations:
+      - contacts:
+        - type: pushover
+          value: test
+        offset_in_minutes: 10
+      - contacts:
+        - type: mail
+          value: test@escalation
+        offset_in_minutes: 20
+

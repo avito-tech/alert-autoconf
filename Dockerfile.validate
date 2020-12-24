@@ -1,0 +1,9 @@
+FROM python:3.7-buster
+
+COPY . $PROJECT_ROOT
+
+RUN pip3 install .
+
+WORKDIR /conf
+
+ENTRYPOINT ["validate.py", "--url", "http://graphite.yourdomain.ru/render/", "--config", "./alert.yaml"]
