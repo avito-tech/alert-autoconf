@@ -1,127 +1,127 @@
 # 0.4.22
-- Добавлена поддержка fallback для специальных контактов в Слаке (таких как `_deployer`).
+- Added fallback support for special contacts in Slack (such as `_deployer`).
 # 0.4.20
-- Исправлено падение при удалении подписок.
+- Fixed crash when deleting subscriptions.
 # 0.4.19
-- Исправлен минорный баг: сравнение триггеров с насыщениями, у которых есть параметры, теперь работает корректно.
+- Minor bug fixed: comparison of triggers with saturations that have parameters now works correctly.
 # 0.4.18
-- Появилась поддержка насыщений.
+- Saturation support was added.
 # 0.4.17
-- Добавлены ретраи запросов в Мойру.
+- Added retrai requests to Moira.
 # 0.4.16
-- Исправление ошибки с несоздававшимися подписками
+- Bug fix with failed subscriptions
 # 0.4.15
-- Появилась возможность настроить наследование сразу для всех триггеров с тэгом MONAD.
+- Now you can configure inheritance for all triggers with the MONAD tag at once.
 # 0.4.14
-- Поддержано удаление всех триггеров/подписок одного файла.
+- Supported deletion of all triggers / subscriptions of one file
 # 0.4.13
-- Подписки, уже сохранённые в других тэгах, теперь не удаляются.
+- Subscriptions already saved in other tags are no longer deleted.
 # 0.4.12
-- Создаваемые подписки теперь тоже сохраняются в Redis, как и триггеры.
-- В user agent добавлена ссылка на сборку в Teamcity, в которой запущен alert-autoconf.
-- Улучшены логи.
+- Created subscriptions are now also saved in Redis, like triggers.
+- Added a link to the assembly in Teamcity in the user agent, in which alert-autoconf is running.
+- Improved logs.
 # 0.4.11
-- {cluster} поддерживается в полях targets и parents.tags
+- {cluster} supported in targets and parents.tags fields
 # 0.4.10
-- Исправлен validate.py
+- Fixed validate.py
 # 0.4.9
-- Триггеры теперь катятся в два прохода, чтобы избежать проблем с наследованием.
+- Triggers now roll in two passes to avoid inheritance issues.
 # 0.4.7
-- Поддерживается наследование триггеров
-- Исправлен баг с обновлением таргетов, при котором создавались дубли триггеров вместо их обновления.
+- Trigger inheritance supported
+- Fixed a bug with updating targets, in which duplicate triggers were created instead of updating them.
 # 0.4.6
-- Расписания в подписках
+- Schedules in subscriptions
 # 0.4.5
-- Поля warn_value и error_value должны заполняться вместе
+- Warn_value and error_value fields must be filled together
 # 0.4.4
-- User Agent теперь содержит название и версию утилиты
-- Поправил документацию
+- User Agent now contains the name and version of the utility
+- Corrected documentation
 # 0.4.3
-- Исключаем системные тэги при выборке триггеров для сравнения, если в Redis нет сервисного токена
+- We exclude system tags when selecting triggers for comparison if there is no service token in Redis
 # 0.4.2
-- Поправил ошибку в сравнении триггеров
+- Fixed a bug in the comparison of triggers
 # 0.4.1
-- warning_value переименован в warn_value в соответствии с моделью триггеров в Moira
+- warning_value renamed to warn_value according to the trigger model in Moira
 # 0.4.0
-- В docker-образах версия python обновлена до 3.7
-- Для валидации данных испольщуется pydantic
-- Секция alerting сделана опциональной
+- In docker images, python version has been updated to 3.7
+- Used for data validation pydantic
+- alerting section made optional
 # 0.3.12
-- Обработка изменений в полях day_disable, time_start, time_end
+- Processing changes in the fields day_disable, time_start, time_end
 # 0.3.11
-- Обновлена версия moira-client до 2.4.2
+- Updated moira-client version to 2.4.2
 # 0.3.10
-- Контакты содержащие "{" добавлены в исключения
+- Contacts containing "{" are added to exceptions
 # 0.3.9
-- Исправлена ошибка в валидаторе: секция `triggers` теперь считается опциональной
+- Fixed bug in validator: section `triggers` is now considered optional
 # 0.3.8
-- Добавлен в исключения тег MONAD
+- Added MONAD tag to exceptions
 # 0.3.7
-- Добавлен скрипт валидации alert.yaml
+- Added alert.yaml validation script
 # 0.3.6
-- Добавлены таймауты для мойра клиента
+- Added timeouts for moir client
 # 0.3.5
-- Исправлена проблема с префиксами
+- Fixed problem with prefixes
 # 0.3.4
-- Исправлена проблема с префиксами
+- Fixed problem with prefixes
 # 0.3.3
-- Исправлена обработка ссылок дашбордов
+- Fixed processing of dashboards links
 # 0.3.2
-- Изменена логика обработки триггеров, в которых не зафиксированны изменения, мы их больше не обновляем, делая фуллскан в редисе!
+- Changed the logic of processing triggers, in which changes are not recorded, we no longer update them, making a full scan in radishes!
 # 0.3.1
-- корректное удаление триггеров из Редиса, при удалении их в Мойре руками.
+- correct removal of triggers from Radish, when removing them in Moira by hand.
 # 0.3.0
-- Регистрация входящих alert.yaml в Redis (аргумент "-s" со значением "redis://$host:$port/$db_num").
-  Exapmle: "-s redis://monitoring01:6379/5"
-- Сверка триггеров из aletr.yaml с имеемыми в Redis (sset) (аргумент "-t" со значением "$teamCity_project_name").
+- Registration of incoming alert.yaml in Redis (argument "-s" with value "redis: // $ host: $ port / $ db_num").
+  Exapmle: "-s redis: // monitoring01: 6379/5"
+- Reconciliation of triggers from aletr.yaml with those in Redis (sset) (argument "-t" with value "$ teamCity_project_name").
   Exapmle: "-t service-saga"
-- В случае отсутствия alert.yaml в скписке зарегистрированных alert.yaml`s в Redis,
-  будут запрошены триггеры в соответсвии с их тегами.
+- If alert.yaml is absent in the list of registered alert.yaml`s in Redis,
+  triggers will be requested according to their tags.
 # 0.2.8
-- При управлении подписками, добавили в исключения, обработку системных тегов ERROR, OK, ...
+- When managing subscriptions, added to exceptions, processing of system tags ERROR, OK, ...
 # 0.2.7
 - bugfix
 # 0.2.6
-- убрано добавление префиксов для системных тегов ERROR, WARN, OK, NODATA
+- removed the addition of prefixes for system tags ERROR, WARN, OK, NODATA
 # 0.2.5
-- добавлен параметр pending_interval
+- added parameter pending_interval
 # 0.2.4
-- добавлена проверка remote триггеров и дэшбордов
+- added check for remote triggers and dashboards
 # 0.2.3
-- добавлена проверка наличия контактов при создании подписки
+- added a check for the presence of contacts when creating a subscription
 # 0.2.2
-- добавлены эскалации в подписках
-- обновлено описание выражений для алертинга
+- added escalations in subscriptions
+- updated description of alert expressions
 # 0.2.1
-- Исправлен url в entrypoint на http://moira.yourdomain.ru/api/
+- Fixed url in entrypoint at http://moira.yourdomain.ru/api/
 # 0.2.0
-- Новая версия конфига (version: "1.1") с поддержкой `prefix` - аналогом namespace для имён триггеров и тегов.
+- New version of the config (version: "1.1") with support for `prefix` - an analogue of namespace for trigger names and tags.
 # 0.1.5
-- Исправлен баг обновление триггеров (Произведена работа по оптимизации поиска и определению измененных/удаленных
-  триггеров)
+- Fixed a bug update triggers (Work has been done to optimize the search and identify changed / deleted
+  triggers)
 # 0.1.4
-- Изменился алгоритм обновления подписки на событие
-  При обновлении списка - те подписки, который были установленны в Мойре и которые никак не меняет файл конфигурации,
-  не удаляюся. Сравнение происходит по списку контактов и тегов подписки.
-- Изменился алгоритм обновления триггеров
-  Так же как и в алгортме обновления подписки - формируюется два списка триггеров для сравнения. Первый список
-  формируется по данным Мойры, где упоминаются тригеры из конфигурационного файла. Второй список по самому
-  конфигурационному файлу. Над триггерами, попавшими в пересечение списков - ничего не делается. С оставшимися
-  триггерами:
-    - если они из списка Мойры - удаляются
-    - если они из списка файла - добавляются
-- Добавился Dockerfile
+- The algorithm for updating the subscription to the event has been changed
+  When updating the list - those subscriptions that were installed in Moira and which do not change the configuration file in any way,
+  I do not delete. Comparison is based on the list of contacts and subscription tags.
+- The algorithm for updating triggers has been changed
+  As well as in the subscription renewal algorithm - two lists of triggers are formed for comparison. First list
+  generated from Moira's data, where triggers from the configuration file are mentioned. Second list for the most
+  configuration file. Nothing is done on triggers that fall into the intersection of lists. With the rest
+  triggers:
+    - if they are from Moira's list, they are removed
+    - if they are from the file list, they are added
+- Added Dockerfile
 
 # 0.1.3
-- Секция triggers в конфигурационном файле опциональна
+- The triggers section in the configuration file is optional
 
 # 0.1.2
-- Исправлена ошибка с установкой уровня логирования
-- Исправлена ошибка с установкой jsonschema из пакета
+- Fixed a bug with setting the logging level
+- Fixed bug with installing jsonschema from package
 
 # 0.1.1
-- Исправлен алгоритм обновления подписки.
-  Теперь при обновлении списка тегированных подписок - предыдущие данные будут полностью заменены новыми.
+- Fixed the algorithm for updating the subscription.
+  Now, when updating the list of tagged subscriptions, the previous data will be completely replaced by the new ones.
 
 # 0.1
-- Реализована базовая функциональность
+- Implemented basic functionality
