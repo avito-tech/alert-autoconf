@@ -3,7 +3,7 @@
 
 This Utility uses a configuration file (alert.yaml), and automatically creates triggers and alerts.
 
-### Docker run: Triggers/Notifications create/edit/del
+### Docker run: Apply create/change/delete commands for Triggers and Notifications
 
 You need to be in the directory with the configuration file "./alerts.yaml"
 
