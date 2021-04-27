@@ -15,11 +15,11 @@ docker run -v `pwd`:/conf registry.yourdomain.ru/alerting/alert:latest \
     --log-level DEBUG
     --cluster $CLUSTER
 ```
-$SERVICE - the name of the service for which triggers and notifications will be created<br />
-$ENV - prod/staging/dev<br />
-$LOGIN - it is best to use system account<br />
+$LOGIN - Moira account. It is best to use special "system" account<br />
 $PASSWORD - password<br />
 $REDIS - redis host for internal metadata<br />
+$SERVICE - the name of the service for which triggers and notifications will be created<br />
+$ENV - prod/staging/dev<br />
 $CLUSTER (optional) - we use this optional parameters to deploy the same triggers to different k8s clusters<br />
 
 ### Validation config file (alert.yaml):
