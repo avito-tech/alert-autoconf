@@ -8,7 +8,7 @@ This Utility uses a configuration file (alert.yaml), and automatically creates t
 You need to be in the directory with the configuration file "./alerts.yaml"
 
 ```shell
-docker pull registry.yourdomain.ru/alerting/alert:latest && docker run -v `pwd`:/conf registry.yourdomain.ru/alerting/alert:latest \
+docker run -v `pwd`:/conf registry.yourdomain.ru/alerting/alert:latest \
     --user $LOGIN --password $PASSWORD \
     --redis_token_storage "redis://$REDIS:6379/1"" \
     --token "hands::$SERVICE::$ENV" \
