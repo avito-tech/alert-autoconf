@@ -20,7 +20,8 @@ $PASSWORD - password<br />
 $REDIS - redis host for internal metadata<br />
 $SERVICE - the name of the service for which triggers and notifications will be created<br />
 $ENV - prod/staging/dev<br />
-$CLUSTER (optional) - we use this optional parameters to deploy the same triggers to different k8s clusters<br />
+$CLUSTER (optional) - We use this parameter when we have a new k8s cluster, <br />
+                      and we want to deploy previously prepared triggers for it<br />
 
 ### Validation config file (alert.yaml):
 ```shell
