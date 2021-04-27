@@ -15,12 +15,12 @@ docker pull registry.yourdomain.ru/alerting/alert:latest && docker run -v `pwd`:
     --log-level DEBUG
     --cluster $CLUSTER
 ```
-$SERVICE - the name of the service for which triggers and notifications will be created
-$ENV - prod/staging/dev
-$LOGIN - it is best to use system account
-$PASSWORD - password
-$REDIS - redis host for internal metadata
-$CLUSTER (optional) - we use this optional parameters to deploy the same triggers to different k8s clusters
+$SERVICE - the name of the service for which triggers and notifications will be created<br />
+$ENV - prod/staging/dev<br />
+$LOGIN - it is best to use system account<br />
+$PASSWORD - password<br />
+$REDIS - redis host for internal metadata<br />
+$CLUSTER (optional) - we use this optional parameters to deploy the same triggers to different k8s clusters<br />
 
 ### Validation config file (alert.yaml):
 ```shell
@@ -54,8 +54,8 @@ version: "1"                  # version package "1" or "1.1"
 prefix: "any-string-"         # a prefix is added for the names of triggers and tags
                               # (only for version: "1.1")
 
-# Блок триггеров
-triggers:s
+# Triggers section
+triggers:
   - name: Trigger_1           # Trigger name
     targets:                  # Targets list
       - apps.services.my_service.api.query_rec_POST.request_time.200.count
@@ -156,7 +156,7 @@ alerting:
 ```
 
 ---
-Example configuration file:
- ./tests/valid_config.yaml
- ./tests/valid_config_blank.yaml
+Example configuration file:<br />
+ ./tests/valid_config.yaml<br />
+ ./tests/valid_config_blank.yaml<br />
  
