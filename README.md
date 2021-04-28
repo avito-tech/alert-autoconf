@@ -1,5 +1,5 @@
 # Alert-autoconf
-## Alerting auto confuration
+## Alerting auto configuration
 
 This Utility uses a configuration file (alert.yaml), and automatically creates triggers and alerts.
 
@@ -46,8 +46,8 @@ docker run -ti --entrypoint=make registry.yourdomain.ru/alerting/alert:latest te
 ### Config file describe
 The configuration file consists of two required sections:
 
-  "triggers:" - configuring triggers
-  "alerting:" - setting of contacts for notification
+    "triggers:" - configuring triggers
+    "alerting:" - setting of contacts for notification
 
 ```
 ---
@@ -157,7 +157,9 @@ alerting:
 ```
 
 ---
-Example configuration file:<br />
- ./tests/valid_config.yaml<br />
- ./tests/valid_config_blank.yaml<br />
+Example configuration file:
+
+ [valid_config.yaml](./tests/valid_config.yaml)
+
+ [valid_config_blank.yaml](./tests/valid_config_blank.yaml)
  
